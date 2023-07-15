@@ -354,7 +354,7 @@ vector<int> solve(vector<int> &A, vector<int> &B, int C) {
     }
     return op;
 }
-// imp asked in contest of both leetcode and gfg
+// imp asked in contest of both leetcode and gfg // https://leetcode.com/problems/put-marbles-in-bags/
 // You have k bags. You are given a 0-indexed integer array weights where weights[i] is the weight of the ith marble. 
 // You are also given the integer k. Divide the marbles into the k bags according to the following rules:
 // 1) No bag is empty.

@@ -72,6 +72,33 @@ vector<pair<int,int>> ActivitySelect(vector<pair<int,int>> v){
     return op;
 }
 // -----------------------------------------------------------------
+// You are given an array of events where events[i] = [startDayi, endDayi]. Every event i starts at startDayi and ends at endDayi.
+// You can attend an event i at any day d where startTimei <= d <= endTimei. You can only attend k event at any time d.
+// Return the maximum number of events you can attend.
+int maxEvents(vector<vector<int>>& events,int k){
+    sort(events.begin(),events.end());
+    priority_queue<int,vector<int>,greater<int>> pq;
+    int ans=0,d=events[0][0],i=0;
+    while(!pq.empty() || i<events.size()){
+        while(i<events.size() && events[i][0]<=d){
+            pq.push(events[i][1]);
+            i++;
+        }
+        int cnt=0;
+        while(!pq.empty() && cnt<k){
+            pq.pop();
+            cnt++;
+        }
+        ans+=cnt;
+        d++;
+        while(!pq.empty() && pq.top()<d){
+            pq.pop();
+        }
+        if(pq.empty() && i<events.size()) d=events[i][0];
+    }
+    return ans;
+}
+// -----------------------------------------------------------------
 bool mycmp2(pair<double,int> x,pair<double,int> y){
     return (x.ff>y.ff);
 }
