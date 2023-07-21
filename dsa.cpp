@@ -272,21 +272,6 @@ ll min(ll x,ll y){
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    ll n;
-    cin>>n;
-    ll gs=0,bs=0;
-    int i=1;
-    while(i<=n){
-        if(i%2!=0){
-            ll x=(bs+1)%(1000000007);
-            gs=(gs+x)%(1000000007);
-        }
-        else{
-            ll y=(gs+1)%(1000000007);
-            bs=(bs+y)%(1000000007);
-        }
-        i++;
-    }
-    cout<<(gs+bs)%(1000000007);
+    
     return 0;
 }

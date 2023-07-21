@@ -1372,3 +1372,43 @@ using namespace std;
 //         }
 //     }
 // };
+
+// int dfs(vector<vector<int>> &ip,vector<int> &vst,int src,int mAx,int &ans){
+//   vst[src]=1;
+//   int val=0;
+//   for(auto v:ip[src]){
+//     if(vst[v]==0){
+//       val+=dfs(ip,vst,v,mAx,ans);
+//     }
+//   }
+//   if(val==0) return mAx;
+//   if(val<mAx) return 0;
+//   ans++;
+//   return 1;
+// }
+
+// int main() {
+//   int n,m;
+//   cin>>n>>m;
+//   vector<vector<int>> ip(n);
+//   int mAx=1;
+//   for(int i=0;i<m;i++){
+//     int u,v;
+//     cin>>u>>v;
+//     ip[u-1].push_back(v-1);
+//     int k=ip[u-1].size();
+//     mAx=max(mAx,k);
+//     ip[v-1].push_back(u-1);
+//     k=ip[v-1].size();
+//     mAx=max(mAx,k);
+//   }
+//   vector<int> vst(n,0);
+//   int ans=0;
+//   for(int i=0;i<n;i++){
+//     if(vst[i]==0){
+//       if(dfs(ip,vst,i,mAx,ans)>ip[i].size()) ans++;
+//     }
+//   }
+//   cout<<ans;
+//   return 0;
+// }

@@ -277,28 +277,32 @@ node *ReversekthnodeI(node *head,int k){
     return NULL;
 }
 
-// ListNode* getReverse(ListNode* head,ListNode* prev,int k){
-//     while(k--){
-//         ListNode* tp=head->next;
-//         head->next=prev;
-//         prev=head;
-//         head=tp;
-//     }
-//     return prev;
-// }
-    
-// ListNode* reverseKGroup(ListNode* head, int k) {
-//     if(head==NULL) return NULL;
-//     int z=0;
-//     ListNode* n1=head;
-//     while(n1){
-//         z++;
-//         n1=n1->next;
-//         if(z==k) break;
-//     }
-//     if(z!=k) return head;
-//     return getReverse(head,reverseKGroup(n1,z),z);
-// }
+// reverse in group of k iterative TC=O(n), SC=O(1)
+pair<struct node*,struct node*> Reversek(struct node* head,int k){
+    node* curr=head;
+    node* prev=NULL;
+    while(head && k--){
+        head=head->next;
+        curr->next=prev;
+        prev=curr;
+        curr=head;
+    }
+    return {prev,curr};
+}
+
+struct node *reverse (struct node *head, int k){ 
+    struct node* tp=head;
+    struct node* newhead=NULL;
+    struct node* n1;
+    while(tp){
+        pair<struct node*,struct node*> tp2=Reversek(tp,k);
+        if(newhead==NULL) newhead=tp2.first;
+        else n1->next=tp2.first;
+        n1=tp;
+        tp=tp2.second;
+    }
+    return newhead;
+}
 
 node *ReverseR1(node *head){
     if(head==NULL || head->next==NULL) return head;

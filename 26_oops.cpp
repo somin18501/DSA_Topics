@@ -63,7 +63,6 @@ int Hero::timeLeft =5; // to initialize static data member
 // Here Human is Base/Super Class
 // Private data members of any class can not be inherited
 class Human{
-
 private:
     int age;
 protected:
@@ -81,6 +80,10 @@ public:
 
 class Animal{
 public:
+    // below is pure virtual function
+    virtual void category() = 0; 
+
+    // below is normal member function 
     void Sound(){
         cout<<"Animals barks\n";
     }
@@ -109,6 +112,13 @@ class Male:public Human,public Animal{
 };
 // protected is similar to private as it do not allow to access data members from outside the class
 // But we can access it outside the class only from inside the child/sub class if it exist or from any class derived from child class which inherits the base class in protected mode
+
+class Dog:public Animal{
+public:
+    void category(){
+        cout<<"Dog is mamal\n";
+    }
+}; 
 
 class A{
 public:
@@ -150,6 +160,25 @@ public:
         cout<<"I am child 1\n";
     }
 };
+
+class Rectangle{
+private:
+    int l;
+protected:
+    int w;
+public:
+    Rectangle(){
+        l=10;
+        w=20;
+    }
+    // friend function declaration
+    friend int getArea(Rectangle);
+};
+
+// defining function definition
+int getArea(Rectangle R){
+    return R.l*R.w;
+}
 
 int main(){
     /*
@@ -366,6 +395,13 @@ int main(){
     
     // Abstraction: Implementation hiding
     
-    
+    // Interface (creating abstract class using pure virtual function)
+    // Dog dg;
+    // dg.category();
+    // dg.Sound();
+
+    // friend function concept
+    // Rectangle R;
+    // cout<<getArea(R)<<endl;
     return 0;
 }

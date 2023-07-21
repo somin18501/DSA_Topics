@@ -20,6 +20,10 @@ using namespace std;
 #define sz size()
 #define mod 1000000007
 #define all(v) v.begin(),v.end()
+// (A+B)%mod
+// (A*B%mod)
+// (A-B)%mod+mod
+// (A/B)%mod = A*pow(B,mod-2)%mod
 // ----------------------------------------------------------------------------------
 int digit_count(int n){
     int c=0;
@@ -156,16 +160,16 @@ void prime_fac3(int n){
         cout<<3<<" ";
     }
     int i;
-    for(i=5;i*i<=n;i+=6) 
-        if(check_prime3(i)) 
-            while(n%i==0){
-                n/=i;
-                cout<<i<<" ";
-            }
-            while(n%(i+2)==0){
-                n/=(i+2);
-                cout<<i+2<<" ";
-            }
+    for(i=5;i*i<=n;i+=6){
+        while(n%i==0){
+            n/=i;
+            cout<<i<<" ";
+        }
+        while(n%(i+2)==0){
+            n/=(i+2);
+            cout<<i+2<<" ";
+        }
+    }
     if(n>3) cout<<n;
     cout<<endl;
 }
