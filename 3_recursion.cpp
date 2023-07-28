@@ -269,32 +269,81 @@ void tower_hanoi(int n,char A,char B,char C){ // here A is source, B is auxillar
     cout<<"Move "<<n<<" from "<<A<<" to "<<C<<endl;
     tower_hanoi(n-1,B,A,C);
 }
-// imp
-void getparenthesis(int A,string op,int k,unordered_set<string> &s){ // give all balanced combinations of parentesis
-    if(k<A){
-		string tp=op;
-		// cout<<op<<endl;
-        for(int i=1;i<tp.length();i++){
-			if(tp[i]==')' && tp[i-1]=='('){
-				op=tp.substr(0,i-1)+"(())"+tp.substr(i+1,tp.length()-(i+1));
-				// cout<<op<<"-"<<endl;
-				if(s.find(op)==s.end()){
-					getparenthesis(A,op,k+1,s);
-				}
-				op=tp.substr(0,i-1)+"()()"+tp.substr(i+1,tp.length()-(i+1));
-				// cout<<op<<"+"<<endl;
-				if(s.find(op)==s.end()){
-					getparenthesis(A,op,k+1,s);
-				}
-			}
-		}
-    }
-    if(k==A){
-		cout<<op<<endl;
-        s.insert(op);
-        return;
-    }
-}
+
+// vector<TreeNode*> getWays(int n){
+//     if(n==0) return {NULL};
+//     vector<TreeNode*> tp;
+//     for(int i=0;i<n;i++){
+//         vector<TreeNode*> l=getWays(i);
+//         vector<TreeNode*> r=getWays(n-i-1);
+//         for(int x=0;x<l.size();x++){
+//             for(int y=0;y<r.size();y++){
+//                 TreeNode* node=new TreeNode;
+//                 node->left=l[x];
+//                 node->right=r[y];
+//                 tp.push_back(node);
+//             }
+//         }
+//     }
+//     return tp;
+// }
+// vector<TreeNode*> generateTrees(int n) {
+//     return getWays(n);
+// }
+
+// vector<string> getBrackets(vector<vector<string>> &dp,int n){
+//     if(dp[n].size()==0){
+//         if(n==0) return dp[n]={""};
+//         if(n==1) return dp[n]={"()"};
+//         for(int i=0;i<n;i++){
+//             vector<string> tmp=getBrackets(dp,i);
+//             vector<string> tmp2=getBrackets(dp,n-i-1);
+//             for(int r=0;r<tmp.size();r++){
+//                 for(int c=0;c<tmp2.size();c++){
+//                     string tp="(";
+//                     tp+=tmp[r];
+//                     tp+=")";
+//                     tp+=tmp2[c];
+//                     dp[n].push_back(tp);
+//                 }
+//             }
+//         }
+//     }
+//     return dp[n];
+// }
+// vector<string> generateParenthesis(int n) {
+//     vector<vector<string>> dp(n+1);
+//     return getBrackets(dp,n);
+// }
+
+// Get distinct full Binary trees i.e. each node has either 0 or 2 child
+// vector<TreeNode*> getWays(vector<vector<TreeNode*>> &dp,int n){
+//     if(dp[n].size()==0){
+//         if(n==1){
+//             TreeNode* node=new TreeNode;
+//             return dp[n]={node};
+//         }
+//         int k=n-1;
+//         for(int i=1;i<k;i+=2){
+//             vector<TreeNode*> l=getWays(dp,i);
+//             vector<TreeNode*> r=getWays(dp,k-i);
+//             for(int x=0;x<l.size();x++){
+//                 for(int y=0;y<r.size();y++){
+//                     TreeNode* node=new TreeNode;
+//                     node->left=l[x];
+//                     node->right=r[y];
+//                     dp[n].push_back(node);
+//                 }
+//             }
+//         }
+//     }
+//     return dp[n];
+// }
+// vector<TreeNode*> allPossibleFBT(int n) {
+//     if((n&1)==0) return {};
+//     vector<vector<TreeNode*>> dp(n+1);
+//     return getWays(dp,n);
+// }
 
 int main(){
     // int n;

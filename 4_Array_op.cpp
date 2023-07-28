@@ -396,6 +396,40 @@ int N_withmaxinRange(vector<int> l,vector<int> r,int n){
 //     }
 // }
 
+// IMP trick to take prefix sum in 2D Matrix
+vector<int> largestSquare(vector<vector<int>> M, int R, int C, int K, int Q, int qi[], int qj[]){
+    vector<vector<int>> psum(R,vector<int>(C));
+    psum[0][0]=M[0][0];
+    for(int i=1;i<R;i++) psum[i][0]=psum[i-1][0]+M[i][0];
+    for(int i=1;i<C;i++) psum[0][i]=psum[0][i-1]+M[0][i];
+    for(int i=1;i<R;i++){
+        for(int j=1;j<C;j++){
+            psum[i][j]=M[i][j]+psum[i-1][j]+psum[i][j-1]-psum[i-1][j-1];
+        }
+    }
+    vector<int> ans(Q,0);
+    for(int i=0;i<Q;i++){
+        int x=qi[i];
+        int y=qj[i];
+        int x2=x;
+        int y2=y;
+        if(M[x][y]<=K) ans[i]=1;
+        while(x>0 && y>0 && x2+1<R && y2+1<C){
+            x--;
+            y--;
+            x2++;
+            y2++;
+            int c1=psum[x2][y2];
+            if(x>0) c1-=psum[x-1][y2];
+            if(y>0) c1-=psum[x2][y-1];
+            if(x>0 && y>0) c1+=psum[x-1][y-1];
+            if(c1<=K) ans[i]=max(ans[i],y2-y+1);
+            else break;
+        }
+    }
+    return ans;
+}
+
 int main(){
     vector<int> v={4,2,2};
     

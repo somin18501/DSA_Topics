@@ -454,6 +454,44 @@ int minCapability(vector<int>& nums, int k) {
 // must vist this below question as it is another way to do binary search when k not given
 // https://leetcode.com/problems/minimum-cost-to-make-array-equal/description/
 
+// Nice way to use binary search in 2D Matrix 
+vector<int> findLargestSquare(vector<vector<int>>& grid, vector<vector<int>>& que, int k) {
+    int m=grid.size();
+    int n=grid[0].size();
+    vector<vector<int>> psum(m,vector<int>(n));
+    psum[0][0]=grid[0][0];
+    for(int i=1;i<m;i++) psum[i][0]=psum[i-1][0]+grid[i][0];    
+    for(int i=1;i<n;i++) psum[0][i]=psum[0][i-1]+grid[0][i];
+    for(int i=1;i<m;i++){
+        for(int j=1;j<n;j++){
+            psum[i][j]=grid[i][j]+psum[i-1][j]+psum[i][j-1]-psum[i-1][j-1];
+        }
+    }
+    int q=que.size();
+    vector<int> ans(q,0);
+    for(int i=0;i<q;i++){
+        int x=que[i][0];
+        int y=que[i][1];
+        int l=0;
+        int h=min(min(x,y),min(m-x-1,n-y-1));
+        while(l<=h){
+            int mid=(l+h)/2;
+            int xt=x-mid,yt=y-mid;
+            int xd=x+mid,yd=y+mid;
+            int c1=psum[xd][yd];
+            if(xt>0) c1-=psum[xt-1][yd];
+            if(yt>0) c1-=psum[xd][yt-1];
+            if(xt>0 && yt>0) c1+=psum[xt-1][yt-1];
+            if (c1 <= k) {
+              ans[i]=2*mid+1;
+              l = mid + 1;
+            }
+            else h=mid-1;
+        }
+    }
+    return ans;
+}
+
 int main(){
     // vector<int> v={3,6,9}; // must always be sorted
     
