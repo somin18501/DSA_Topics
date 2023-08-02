@@ -896,6 +896,13 @@ int getNoOfSubsetT(int *arr,int n,int sum){
     return tab[n][sum];
 }
 // -------------------------------------------------------------------------------------------------------
+// Patterns of partisan DP:
+// MCM
+// Burst ballon
+// Palindrome Partition
+// entropy of combining
+// Crayon colour 
+// -------------------------------------------------------------------------------------------------------
 // finding minimum number for multiplication required in matrix chain multiplication
 int mChainR(int *arr,int i,int j){
     if(i+1==j) return 0;
@@ -923,6 +930,27 @@ int mChainT(int *arr,int n){
         }
     }
     return tab[0][n-1];
+}
+// -------------------------------------------------------------------------------------------------------
+// There is a strange printer with the following two special properties:
+// The printer can only print a sequence of the same character each time.
+// At each turn, the printer can print new characters starting from and ending at any place and will cover the original existing characters.
+// Given a string s, return the minimum number of turns the printer needed to print it.
+int getMin(vector<vector<int>> &dp,string s,int i,int e){
+    if(i>e) return 0;
+    if(dp[i][e]==-1){
+        int j;
+        for(j=i+1;j<=e;j++){
+            if(s[j]!=s[i]) break; 
+        }
+        dp[i][e]=1+getMin(dp,s,j,e);
+        for(int k=j;k<=e;k++){
+            if(s[k]==s[i]){
+                dp[i][e]=min(dp[i][e],getMin(dp,s,j,k-1)+getMin(dp,s,k,e));
+            }
+        }
+    }
+    return dp[i][e];
 }
 // -------------------------------------------------------------------------------------------------------
 // Palindrome Partisan i.e. find minimum number of partisans required to make all partitions as palindrome

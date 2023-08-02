@@ -364,6 +364,7 @@ int main(){
         // m1.Human::Sound();
         // m1.Animal::Sound();
     */
+    // Eg: of ambiguity arising due to multiple inheritance https://www.geeksforgeeks.org/virtual-base-class-in-c/
 
     // Types of Polymorphism
     // 1) Complie time(also known as static polymorphism)
@@ -395,13 +396,25 @@ int main(){
     
     // Abstraction: Implementation hiding
     
-    // Interface (creating abstract class using pure virtual function)
+    // // Interface (creating abstract class using pure virtual function)
+    // // A class is abstract if it has at least one pure virtual function.
     // Dog dg;
     // dg.category();
     // dg.Sound();
+    // // We can have pointers and references of abstract class type.
+    // Animal* ptr=new Dog();
+    // ptr->category();
+    // // If we do not override the pure virtual function in the derived class, then the derived class also becomes an abstract class to one can not make object of it.
+    // // An abstract class can have constructors. 
+    // // An abstract class in C++ can also be defined using struct keyword.
 
     // friend function concept
     // Rectangle R;
     // cout<<getArea(R)<<endl;
+
+    // try{
+    //     throw err;
+    // }catch(int err){
+    // }
     return 0;
 }
