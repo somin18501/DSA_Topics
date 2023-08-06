@@ -270,25 +270,26 @@ void tower_hanoi(int n,char A,char B,char C){ // here A is source, B is auxillar
     tower_hanoi(n-1,B,A,C);
 }
 
-// vector<TreeNode*> getWays(int n){
-//     if(n==0) return {NULL};
-//     vector<TreeNode*> tp;
-//     for(int i=0;i<n;i++){
-//         vector<TreeNode*> l=getWays(i);
-//         vector<TreeNode*> r=getWays(n-i-1);
-//         for(int x=0;x<l.size();x++){
-//             for(int y=0;y<r.size();y++){
-//                 TreeNode* node=new TreeNode;
-//                 node->left=l[x];
-//                 node->right=r[y];
-//                 tp.push_back(node);
+// vector<TreeNode*> getWays(int l,int r){
+//     if(l>r) return {NULL};
+//     vector<TreeNode*> ans;
+//     for(int i=l;i<=r;i++){
+//         vector<TreeNode*> lft=getWays(l,i-1);
+//         vector<TreeNode*> rgt=getWays(i+1,r);
+//         for(int x=0;x<lft.size();x++){
+//             for(int y=0;y<rgt.size();y++){
+//                 TreeNode* tmp=new TreeNode;
+//                 tmp->val=i;
+//                 tmp->left=lft[x];
+//                 tmp->right=rgt[y];
+//                 ans.push_back(tmp);
 //             }
 //         }
 //     }
-//     return tp;
+//     return ans;
 // }
 // vector<TreeNode*> generateTrees(int n) {
-//     return getWays(n);
+//     return getWays(1,n);
 // }
 
 // vector<string> getBrackets(vector<vector<string>> &dp,int n){
