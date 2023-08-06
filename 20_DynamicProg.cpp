@@ -1007,6 +1007,54 @@ int PalindromePartT(string s,int n){
     return tab[0][n-1];
 }
 // -------------------------------------------------------------------------------------------------------
+int getMaxScore(vector<vector<int>> &mem,vector<int>& nums,int l,int r){
+    if(mem[l][r]==-1){
+        if(l>r) return 0;
+        mem[l][r]=0;
+        for(int i=l;i<=r;i++){
+            mem[l][r]=max(mem[l][r],nums[l-1]*nums[i]*nums[r+1]+getMaxScore(mem,nums,l,i-1)+getMaxScore(mem,nums,i+1,r));
+        }
+    }
+    return mem[l][r];
+}
+int maxCoins(vector<int>& nums) {
+    vector<int> tmp;
+    tmp.push_back(1);
+    for(int i=0;i<nums.size();i++) tmp.push_back(nums[i]);
+    tmp.push_back(1);
+    vector<vector<int>> mem(tmp.size(),vector<int>(tmp.size(),-1));
+    return getMaxScore(mem,tmp,1,nums.size());
+}
+// -------------------------------------------------------------------------------------------------------
+// entropy of combining
+// ll getMinEntropy(vector<vector<ll>> &dp,vector<ll> &ip,int l,int r){
+//     if(l>r) return INT_MAX;
+//     if(l==r) return 0;
+//     if(dp[l][r]==-1){
+//         dp[l][r]=LLONG_MAX;
+//         ll tp=ip[r]-ip[l-1];
+//         fori(i,l,r){
+//             dp[l][r]=min(dp[l][r],tp+getMinEntropy(dp,ip,l,i)+getMinEntropy(dp,ip,i+1,r));
+//         }
+//     }
+//     return dp[l][r];
+// }
+// int main(){
+//     ios_base::sync_with_stdio(false);
+//     cin.tie(NULL);
+//     int n;
+//     cin>>n;
+//     vector<ll> ip(n+1);
+//     ip[0]=0;
+//     fori(i,0,n){
+//         cin>>ip[i+1];
+//         ip[i+1]+=ip[i];
+//     }
+//     vector<vector<ll>> dp(n+1,vector<ll>(n+1,-1));
+//     cout<<getMinEntropy(dp,ip,1,n)<<endl;
+//     return 0;
+// }
+// -------------------------------------------------------------------------------------------------------
 // find all combinations of substrings that forms palindrome
 bool ispalin(string s,int l,int r){
     while(l<r){
