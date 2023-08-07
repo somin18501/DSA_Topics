@@ -141,10 +141,10 @@ async function asteroidOrbits(year, orbitclass) {
                 let y = new Date(resp[j].discovery_date).getFullYear();
                 if(y == year){
                     let pe;
-                    if(!response[i].period_yr)
+                    if(!resp[i].period_yr)
                         pe = 1;
                     else 
-                        pe = response[i].period_yr;
+                        pe = resp[i].period_yr;
                     ans.push({d:response[i].designation,p:pe});
                 }
             }
