@@ -165,10 +165,12 @@ async function asteroidOrbits(year, orbitclass) {
 // Question 1
 async function findCountry(region, keyword) {
     let response = await axios.get(`https://jsonmock.hackerrank.com/api/countries`);
+    // let response = await fetch(`https://jsonmock.hackerrank.com/api/countries`);
+    // response = await response.json();
     let tot_pages = response.data.total_pages; 
     let ans = [];
     for(let i=1;i<=tot_pages;i++){
-        let resp = await axios.get(`https://jsonmock.hackerrank.com/api/countries/search?page=${page}`);
+        let resp = await axios.get(`https://jsonmock.hackerrank.com/api/countries/search?page=${i}`);
         resp=resp.data.data;
         for(let j=0;j<resp.length;j++){
             if(resp[j].region==region && resp[j].name==keyword){
