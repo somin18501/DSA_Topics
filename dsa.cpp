@@ -46,6 +46,7 @@ using namespace std;
 #define NoEleLessX(v, x) upper_bound(all(v), x) - v.begin() // applicable only for sorted array
 #define forr(it,ds) for(auto it = ds.rbegin(); it != ds.rend(); ++it)
 #define forf(it,ds) for(auto it = ds.begin(); it != ds.end(); ++it)
+// getline(cin,x);
 // printf("%0.5lf",l);
 // cout << fixed << setprecision(7);
 // s1.compare(s2); // return 0 if equal, return <0 if s1<s2, return >0 if s1>s2;
@@ -73,6 +74,7 @@ using namespace std;
 //     }
 // };
 
+// // Trie can be also considered as N-ary tree
 // struct trienode{
 //     trienode* child[26];
 //     bool isend;
@@ -81,16 +83,6 @@ using namespace std;
 //         isend=false;
 //     }
 // };
-
-// // use when priority queue needs to be an object
-// struct obj{
-//     ll dist;
-//     ll cx;
-//     ll cy;
-// };
-// bool operator<(const struct obj& obj1,const struct obj& obj2){ // will have min dist on the top
-//     return obj1.dist>obj2.dist;
-// }
 
 // MAX_QUEUE // return max in queue in O(1);
 // class max_queue{
@@ -205,9 +197,51 @@ using namespace std;
 //     }
 // };
 
-// bool mycmp(pair<int,int> n1,pair<int,int> n2){
+// class MedianStream{
+//     priority_queue<int> s;
+//     priority_queue<int,vector<int>,greater<int>> g;
+// public:
+//     MedianStream(){
+//         s=priority_queue<int>();
+//         g=priority_queue<int,vector<int>,greater<int>>();
+//     }
+//     void insert(int x){
+//         if(s.size()>g.size()){
+//             if(x>s.top()) g.push(x);
+//             else{
+//                 g.push(s.top());
+//                 s.pop();
+//                 s.push(x);
+//             }
+//         }
+//         else{
+//             if(!g.empty() && x<=g.top()) s.push(x);
+//             else{
+//                 g.push(x);
+//                 s.push(g.top());
+//                 g.pop();
+//             }
+//         }
+//     }
+//     int getMedian(){
+//         if(s.size()>g.size()==1) return s.top();
+//         else return ceil((s.top()+g.top())/2.0);
+//     }
+// };
+
+// bool mycmp(pair<int,int> &n1,pair<int,int> &n2){
 //     if(n1.ff==n2.ff) return n1.ss<n2.ss;
 //     return n1.ff>n2.ff;
+// }
+
+// // use when priority queue needs to be an object
+// struct obj{
+//     ll dist;
+//     ll cx;
+//     ll cy;
+// };
+// bool operator<(const struct obj& obj1,const struct obj& obj2){ // will have min dist on the top
+//     return obj1.dist>obj2.dist;
 // }
 
 // to overload operator '<' for using priority queue for different data type
@@ -262,10 +296,6 @@ ll max(ll x,ll y){
 ll min(ll x,ll y){
     return (x<y)?x:y;
 }
-
-// for upper/lower bound on pair use 
-// auto it = lower_bound(all(ip),make_pair((int_type)5,numeric_limits<int_type>::min()));    
-// auto it = lower_bound(all(ip),make_pair(numeric_limits<int_type>::min(),(int_type)5));    
 
 
 

@@ -1,89 +1,5 @@
-// // Question 1
-// function comp(a,b)
-// {
-//     if(a.population === b.population)
-//     {
-//         return (a.name<b.name);
-//     }
-//     return (a.population - b.population);
-// }
-// async function findCountry(region, keyword) {
-//     let res = await axios.get(`https://jsonmock.hackerrank.com/api/countries/search?region=${region}&name=${keyword}&page=1`);
-//     let n = res.data.total_pages;
-//     // console.log(res.data);
-//     let result = [];
-//     for(let i of res.data.data)
-//     {
-//         result.push(i);
-//     }
-    
-//     for(let page =2;page<=n;page++)
-//     {
-//         res = await axios.get(`https://jsonmock.hackerrank.com/api/countries/search?region=${region}&name=${keyword}&page=${page}`);
-        
-//         for(let i of res.data.data)
-//         {
-//             result.push(i);
-//         }
-//     }
-    
-//     // console.log(result);
-//     result.sort(comp);
-    
-//     let ans = [];
-    
-//     for(let i of result)
-//     {
-//         ans.push(`${i.name},${i.population}`);
-//     }
-    
-//     return ans;
-// }
-
-// // Question 2
-// async function asteroidOrbits(year, orbitclass) {
-//     let total = 0;
-//     let response = await axios.get(`https://jsonmock.hackerrank.com/api/asteroids/search?orbit_class=${orbitclass}`);
-//     let ans = []
-//     // console.log(response.data);
-//     total = response.data.total_pages;
-//     // console.log(total);
-    
-//     for(let i = 1; i<=total; i++){
-//         response = await axios.get(`https://jsonmock.hackerrank.com/api/asteroids/search?orbit_class=${orbitclass}&page=${i}`);
-//         response = response.data.data;
-//         // console.log(response);
-//         for(let i = 0; i<response.length; i++){
-//             let y = new Date(response[i].discovery_date).getFullYear();
-//             if(y == year){
-//                 let pe;
-//                 if(!response[i].period_yr)
-//                     pe = 1;
-//                 else 
-//                     pe = response[i].period_yr;
-//                 ans.push({d:response[i].designation, y:y,p:pe});
-//             }
-//         }
-//     }
-//     ans.sort((a,b) => {
-//                     if(a.p == b.p)
-//                         return a.d.localeCompare(b.d);
-//                     return a.p-b.p;
-//                 }
-//             )
-//     //  console.log(ans.length);
-//     // for(let i = 0; i<ans.length; i++){
-//     //     console.log(ans[i].d, ans[i].y);
-//     // }
-//     let res = [];
-//     for(let i = 0; i<ans.length; i++){
-//         // console.log(ans[i].d);
-//         res.push(ans[i].d);
-//     }
-//     return res;
-// }
-
-// ------------------------------------------------------------------------------------------------------
+// https://www.w3schools.com/js/default.asp
+// --------------------------------------------------------------------------------------------------
 // Question 4
 async function bestUniversityByCountry(country){
     let response = await axios.get(`https://jsonmock.hackerrank.com/api/universities`);
@@ -137,7 +53,7 @@ async function asteroidOrbits(year, orbitclass) {
         let resp = await axios.get(`https://jsonmock.hackerrank.com/api/asteroids/search?page=${i}`);
         resp = resp.data.data;
         for(let j = 0; j<resp.length; j++){
-            if(resp[j].orbit_class==orbitclass){
+            if(resp[j].orbit_class.toLowerCase().includes()){
                 let y = new Date(resp[j].discovery_date).getFullYear();
                 if(y == year){
                     let pe;
@@ -190,3 +106,45 @@ async function findCountry(region, keyword) {
     }
     return res;
 }
+// --------------------------------------------------------------------------------------------------
+// const promise = new Promise(function (resolve, reject) {
+// 	const string1 = "geeksforgeeks";
+// 	const string2 = "geeksforgeeks";
+// 	if (string1 === string2) {
+// 	    resolve();
+// 	} else {
+// 	    reject();
+// 	}
+// });
+
+// promise.then(function () {
+//     console.log("Promise resolved successfully");
+// })
+// .catch(function () {
+//     console.log("Promise is rejected");
+// });
+// --------------------------------------------------------------------------------------------------
+// const helperPromise = function () {
+//     const promise = new Promise(function (resolve, reject) {
+//         const x = "geeksforgeeks";
+//         const y = "geeksforgeeks";
+//         if (x === y) {
+//             resolve("Strings are same");
+//         } else {
+//             reject("Strings are not same");
+//         }
+//     });
+//     return promise;
+// };
+
+// async function demoPromise() {
+//     try {
+//         let message = await helperPromise();
+//         console.log(message);
+//     } catch (error) {
+//         console.log("Error: " + error);
+//     }
+// }
+
+// demoPromise();
+// --------------------------------------------------------------------------------------------------
