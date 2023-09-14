@@ -950,6 +950,41 @@ bool check(int N,int M,vector<vector<int>> Edges)
 }
 // must visit below question
 // https://thejoboverflow.com/problem/342/
+
+// Code for getting Eulerian path in directed graph
+// https://leetcode.com/problems/reconstruct-itinerary/description/
+vector<string> findItinerary(vector<vector<string>>& tick) {
+    map<string,vector<string>> mp;
+    map<string,int> cnt;
+    for(int i=0;i<tick.size();i++){
+        mp[tick[i][0]].push_back(tick[i][1]);
+        cnt[tick[i][0]]++;
+    }
+    for(auto z:mp){
+        sort(mp[z.first].begin(),mp[z.first].end(),greater<string>());
+    }
+    stack<string> cp;
+    vector<string> cir;
+    string curr="JFK";
+    cp.push(curr);
+    while(!cp.empty()){
+        if(cnt[curr]>0){
+            string tp=mp[curr].back();
+            cp.push(curr);
+            mp[curr].pop_back();
+            cnt[curr]--;
+            curr=tp;
+        }
+        else{
+            cir.push_back(curr);
+            curr=cp.top();
+            cp.pop();
+        }
+    }
+    reverse(cir.begin(),cir.end());
+    return cir;
+}
+
 int main(){
     int ver=5;
     vector<int> adjlist[ver];

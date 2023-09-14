@@ -250,6 +250,8 @@ ll o1_hole(vector<ll> ip){
     }
     return mAx;
 }
+// application of kadane
+// // https://practice.geeksforgeeks.org/problems/flip-bits0240/1
 
 int majority_ele(vector<int> v){  // imp // Moore’s Voting Algorithm
     int count=1,res=0;
